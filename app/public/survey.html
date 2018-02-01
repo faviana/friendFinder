@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Survey</title>
+
+    <!-- Bootstrap -->
+    <!-------------------------------------------------------------------------------------------------->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Survey</h2>
+
+        <!-- Your information -->
+        <!-------------------------------------------------------------------------------------------------->
+        <h4>What is Your Name? (Required)</h4>
+        <input type="text" id="name" class="form-control" required>
+
+        <hr />
+
+        </br>
+        <h4>Question One</h4>
+        <p>Would you rather have a pet that </p>
+        <form>
+            <label class="radio-inline" id="one">
+                <input type="radio" name="optradio">sleeps all day
+            </label>
+            <label class="radio-inline" id="two">
+                <input type="radio" name="optradio">plays all day
+            </label>
+            <label class="radio-inline" id="three">
+                <input type="radio" name="optradio">flies all day
+            </label>
+        </form>
+
+        </br>
+        <h4>Question Two</h4>
+        <p>Would you rather have a pet that you could </p>
+        <form>
+            <label class="radio-inline" id="one">
+                <input type="radio" name="optradio">watch all day
+            </label>
+            <label class="radio-inline" id="two">
+                <input type="radio" name="optradio">play half day
+            </label>
+            <label class="radio-inline" id="three">
+                <input type="radio" name="optradio">play all day
+            </label>
+        </form>
+
+        </br>
+        <h4>Question Three</h4>
+        <p>What size of pet would you like </p>
+        <form>
+            <label class="radio-inline" id="one">
+                <input type="radio" name="optradio">large
+            </label>
+            <label class="radio-inline" id="two">
+                <input type="radio" name="optradio">small
+            </label>
+            <label class="radio-inline" id="three">
+                <input type="radio" name="optradio">medium
+            </label>
+        </form>
+
+    </br>
+    <h4>Question Four</h4>
+    <p>What would you like to do with your pet </p>
+    <form>
+        <label class="radio-inline" id="one">
+            <input type="radio" name="optradio">play outside
+        </label>
+        <label class="radio-inline" id="two">
+            <input type="radio" name="optradio">play inside
+        </label>
+        <label class="radio-inline" id="three">
+            <input type="radio" name="optradio">watch them play
+        </label>
+    </form>
+
+</br>
+
+        <!-- Button trigger modal -->
+        <button id="button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Submit</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Home button -->
+        <!-------------------------------------------------------------------------------------------------->
+        <div class="text-center">
+            <a href="/home">
+                <button type="button" class="btn btn-lg btn-primary">
+                    <span class="glyphicon glyphicon-list-alt"></span> Home</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-------------------------------------------------------------------------------------------------->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <a href="/api/friends">API Survey Link</a> |
+                <a href="https://github.com/faviana/friendFinder">GitHub Repo</a>
+            </p>
+        </div>
+    </footer>
+
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        });
+
+        $('#button').on("click", function () {
+            var userInput = {
+                name: $('#name').val().trim(),
+                scores: [$('#one').val().trim(), $('#two').val().trim(), $('#three').val().trim()]
+            }
+
+            $.post("/api/friends", userInput, function (data) {
+
+                console.log(data)
+            });
+            return false;
+        });
+    </script>
+
+</body>
+
+</html>
